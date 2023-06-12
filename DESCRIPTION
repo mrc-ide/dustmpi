@@ -24,4 +24,3 @@ Suggests:
 Remotes:
     mrc-ide/dust
 Config/testthat/edition: 3
-SystemRequirements: C++11
