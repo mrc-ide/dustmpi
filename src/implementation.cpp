@@ -1,5 +1,5 @@
 // lots of cpp11 code, no mpi code
-#include "implementation.hpp"
+#include "implementation.h"
 
 // Memory layout in the result is:
 // [aaaaabbbbbcccccddddd]

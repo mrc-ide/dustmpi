@@ -2,7 +2,7 @@
 #include <cpp11.hpp>
 
 #include <dust/r/random.hpp>
-#include "implementation.hpp"
+#include "implementation.h"
 
 [[cpp11::register]]
 cpp11::sexp simulate_model(cpp11::list r_pars,
