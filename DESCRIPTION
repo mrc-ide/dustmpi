@@ -11,9 +11,15 @@ Description: Work out how to get R, MPI and C++ working together for dust.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 URL: https://github.com/mrc-ide/dustmpi
 BugReports: https://github.com/mrc-ide/dustmpi/issues
+LinkingTo:
+    cpp11,
+    dust
+Imports:
+    dust
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+SystemRequirements: C++11
