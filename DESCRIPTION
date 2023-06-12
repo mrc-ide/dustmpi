@@ -1,0 +1,19 @@
+Package: dustmpi
+Title: Dust in MPI
+Version: 0.1.0
+Authors@R: c(person("Wes", "Hinsley", role = c("aut", "cre"),
+                    email = "w.hinsley@imperial.ac.uk"),
+             person("Rich", "FitzJohn", role = c("aut"),
+                    email = "w.hinsley@imperial.ac.uk"),
+             person("Imperial College of Science, Technology and Medicine",
+                    role = "cph"))
+Description: Work out how to get R, MPI and C++ working together for dust.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+URL: https://github.com/mrc-ide/dustmpi
+BugReports: https://github.com/mrc-ide/dustmpi/issues
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
