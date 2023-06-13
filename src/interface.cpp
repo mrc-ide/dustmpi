@@ -9,7 +9,8 @@ cpp11::sexp simulate_model(cpp11::list r_pars,
                            std::vector<double> initial_state,
                            int end_time,
                            int n_particles,
-                           cpp11::sexp r_rng_ptr) {
+                           cpp11::sexp r_rng_ptr,
+                           bool use_mpi) {
   const int freq = cpp11::as_cpp<int>(r_pars["freq"]);
   model::pars pars{cpp11::as_cpp<double>(r_pars["beta"]),
                    cpp11::as_cpp<double>(r_pars["gamma"]),
@@ -18,7 +19,7 @@ cpp11::sexp simulate_model(cpp11::list r_pars,
 
   auto rng = dust::random::r::rng_pointer_get<rng_state_type>(r_rng_ptr);
 
-  const auto result = run_simulation(pars, initial_state, end_time, n_particles, rng);
+  const auto result = run_simulation(pars, initial_state, end_time, n_particles, rng, use_mpi);
 
   cpp11::writable::doubles r_result(result.size());
   const auto n_state = initial_state.size();

@@ -1,6 +1,6 @@
 // lots of cpp11 code, no mpi code
 #include <memory>
-
+#include "dustmpi.h"
 #include <dust/random/random.hpp>
 
 using rng_state_type = dust::random::xoshiro256plus;
@@ -48,4 +48,5 @@ std::vector<double> run_simulation(const model::pars& pars,
                                    const std::vector<double>& initial_state,
                                    const int end_time,
                                    const int n_particles,
-                                   dust::random::prng<rng_state_type> * rng);
+                                   dust::random::prng<rng_state_type> * rng,
+                                   bool use_mpi);

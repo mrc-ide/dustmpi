@@ -6,16 +6,16 @@
 #include <R_ext/Visibility.h>
 
 // interface.cpp
-cpp11::sexp simulate_model(cpp11::list r_pars, std::vector<double> initial_state, int end_time, int n_particles, cpp11::sexp r_rng_ptr);
-extern "C" SEXP _dustmpi_simulate_model(SEXP r_pars, SEXP initial_state, SEXP end_time, SEXP n_particles, SEXP r_rng_ptr) {
+cpp11::sexp simulate_model(cpp11::list r_pars, std::vector<double> initial_state, int end_time, int n_particles, cpp11::sexp r_rng_ptr, bool use_mpi);
+extern "C" SEXP _dustmpi_simulate_model(SEXP r_pars, SEXP initial_state, SEXP end_time, SEXP n_particles, SEXP r_rng_ptr, SEXP use_mpi) {
   BEGIN_CPP11
-    return cpp11::as_sexp(simulate_model(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(r_pars), cpp11::as_cpp<cpp11::decay_t<std::vector<double>>>(initial_state), cpp11::as_cpp<cpp11::decay_t<int>>(end_time), cpp11::as_cpp<cpp11::decay_t<int>>(n_particles), cpp11::as_cpp<cpp11::decay_t<cpp11::sexp>>(r_rng_ptr)));
+    return cpp11::as_sexp(simulate_model(cpp11::as_cpp<cpp11::decay_t<cpp11::list>>(r_pars), cpp11::as_cpp<cpp11::decay_t<std::vector<double>>>(initial_state), cpp11::as_cpp<cpp11::decay_t<int>>(end_time), cpp11::as_cpp<cpp11::decay_t<int>>(n_particles), cpp11::as_cpp<cpp11::decay_t<cpp11::sexp>>(r_rng_ptr), cpp11::as_cpp<cpp11::decay_t<bool>>(use_mpi)));
   END_CPP11
 }
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
-    {"_dustmpi_simulate_model", (DL_FUNC) &_dustmpi_simulate_model, 5},
+    {"_dustmpi_simulate_model", (DL_FUNC) &_dustmpi_simulate_model, 6},
     {NULL, NULL, 0}
 };
 }
