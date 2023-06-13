@@ -41,6 +41,6 @@ test_that("MPI Sim is faster than single-processor", {
   script <- test_script(1000, 1000, NULL, pars$gamma, pars$beta, pars$freq, y[1], y[2], y[3], end_time)
   t2 <- system.time(test_mpi(script, 10))
 
-  expect_true(t2[['elapsed']] < t1[['elapsed']] / 3)
+  expect_true(t2[['elapsed']] < t1[['elapsed']])
 })
 

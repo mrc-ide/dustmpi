@@ -1,2 +1,2 @@
-PKG_CFLAGS = -lmsmpi -Wall -Wextra -pedantic
+PKG_CXXFLAGS = -lmsmpi
 PKG_LIBS = -lmsmpi
