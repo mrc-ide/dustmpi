@@ -1,1 +1,0 @@
-dustmpi:::simulate_model_to_file(list(gamma = 0.1, beta = 0.2, freq = 4),       c(1000, 100, 0, 0, 0), 20, 10,       dust::dust_rng_pointer$new(42, n_streams = 10), "C:\Users\wrh1\AppData\Local\Temp\RtmpwhkCEi\file3db046b231e7", TRUE)
