@@ -1,2 +1,1 @@
-PKG_CXXFLAGS = -lmsmpi -I/usr/include/x86_64-linux-gnu/mpich
-PKG_LIBS = -lmsmpi
+PKG_CXXFLAGS = -I/usr/include/x86_64-linux-gnu/mpich
