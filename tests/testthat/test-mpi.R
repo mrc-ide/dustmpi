@@ -1,10 +1,9 @@
 test_mpi <- function(script, procs = 2) {
   cmdquote <- if (as.character(Sys.info()['sysname']) == "Windows") '"' else "'"
 
-  suppressWarnings(
-    system2("mpiexec", sprintf(" -n %d Rscript -e %s%s%s", procs,
+  system2("mpiexec", sprintf(" -n %s Rscript -e %s%s%s", procs,
                                cmdquote, script, cmdquote),
-            stdout = TRUE, stderr = TRUE))
+            stdout = "", stderr = "")
 
 }
 
@@ -44,7 +43,7 @@ test_that("MPI Sim is faster than single-processor", {
   rng1 <- dust::dust_rng_pointer$new(42, n_streams = 1000)
   t1 <- system.time(res1 <- simulate_model(pars, y, end_time, 1000, rng1, FALSE))
 
-  script <- test_script(1000, 1000, NULL, pars$gamma, pars$beta, pars$freq, y[1], y[2], y[3], end_time)
+  script <- test_script(1000, 1000, "", pars$gamma, pars$beta, pars$freq, y[1], y[2], y[3], end_time)
   t2 <- system.time(test_mpi(script, 10))
 
   expect_true(t2[['elapsed']] < t1[['elapsed']])
