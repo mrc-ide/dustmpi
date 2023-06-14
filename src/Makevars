@@ -1,1 +1,2 @@
-PKG_CXXFLAGS = -I/usr/include/x86_64-linux-gnu/mpich
+PKG_CXXFLAGS = -I/usr/include/x86_64-linux-gnu/mpich -lmpich
+PKG_LIBS = -lmpich
