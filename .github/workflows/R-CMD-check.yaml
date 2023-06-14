@@ -51,6 +51,3 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-
-      - uses: mxschmitt/action-tmate@v3
-
