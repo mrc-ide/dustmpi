@@ -9,6 +9,7 @@ fi
 if [[ `uname` -eq Darwin ]] ; then
 
 echo "PKG_CXXFLAGS = -I/usr/include/x86_64-linux-gnu/mpich" > ./src/Makevars
+echo "PKG_LIBS = -lmpich" >> ./src/Makevars
 
 #if linux
 elif [[ `uname` -eq Linux ]] ;then
