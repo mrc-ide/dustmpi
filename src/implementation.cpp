@@ -20,7 +20,6 @@ std::vector<double> run_simulation(const model::pars& pars,
   int mpi_size = 1;
 
   if (use_mpi) {
-    start_mpi();
     mpi_rank = get_mpi_rank();
     mpi_size = get_mpi_size();
   }
@@ -70,7 +69,6 @@ std::vector<double> run_simulation(const model::pars& pars,
 
   if (use_mpi) {
     result = combine_results(result);
-    end_mpi();
   }
 
   return result;

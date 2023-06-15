@@ -5,6 +5,43 @@
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
+// dustmpi.cpp
+void start_mpi();
+extern "C" SEXP _dustmpi_start_mpi() {
+  BEGIN_CPP11
+    start_mpi();
+    return R_NilValue;
+  END_CPP11
+}
+// dustmpi.cpp
+int get_mpi_size();
+extern "C" SEXP _dustmpi_get_mpi_size() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(get_mpi_size());
+  END_CPP11
+}
+// dustmpi.cpp
+int get_mpi_rank();
+extern "C" SEXP _dustmpi_get_mpi_rank() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(get_mpi_rank());
+  END_CPP11
+}
+// dustmpi.cpp
+void end_mpi();
+extern "C" SEXP _dustmpi_end_mpi() {
+  BEGIN_CPP11
+    end_mpi();
+    return R_NilValue;
+  END_CPP11
+}
+// dustmpi.cpp
+double get_mpi_wtime();
+extern "C" SEXP _dustmpi_get_mpi_wtime() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(get_mpi_wtime());
+  END_CPP11
+}
 // interface.cpp
 cpp11::sexp simulate_model(cpp11::list r_pars, std::vector<double> initial_state, int end_time, int n_particles, cpp11::sexp r_rng_ptr, bool use_mpi);
 extern "C" SEXP _dustmpi_simulate_model(SEXP r_pars, SEXP initial_state, SEXP end_time, SEXP n_particles, SEXP r_rng_ptr, SEXP use_mpi) {
@@ -15,7 +52,12 @@ extern "C" SEXP _dustmpi_simulate_model(SEXP r_pars, SEXP initial_state, SEXP en
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
+    {"_dustmpi_end_mpi",        (DL_FUNC) &_dustmpi_end_mpi,        0},
+    {"_dustmpi_get_mpi_rank",   (DL_FUNC) &_dustmpi_get_mpi_rank,   0},
+    {"_dustmpi_get_mpi_size",   (DL_FUNC) &_dustmpi_get_mpi_size,   0},
+    {"_dustmpi_get_mpi_wtime",  (DL_FUNC) &_dustmpi_get_mpi_wtime,  0},
     {"_dustmpi_simulate_model", (DL_FUNC) &_dustmpi_simulate_model, 6},
+    {"_dustmpi_start_mpi",      (DL_FUNC) &_dustmpi_start_mpi,      0},
     {NULL, NULL, 0}
 };
 }
