@@ -1,11 +1,18 @@
 test_mpi <- function(script, procs = 2) {
   on_windows <- as.character(Sys.info()['sysname']) == "Windows"
-  cmdquote <- if (on_windows) '"' else "'"
-  rs_path <- if (on_windows) "" else "$(R_HOME)/bin/"
+  on_mac <- as.character(Sys.info()['sysname']) == "Darwin"
+  on_linux <- as.character(Sys.info()['sysname']) == "Linux"
 
-  system2("mpiexec", sprintf(" -n %s %sRscript -e %s%s%s", procs, rs_path,
+  cmdquote <- if (on_windows) '"' else "'"
+  rs_path <- if (on_linux) "$(R_HOME)/bin/" else ""
+
+  ret <- system2("mpiexec", sprintf(" -n %s %sRscript -e %s%s%s", procs, rs_path,
                                cmdquote, script, cmdquote),
-            stdout = "", stderr = "")
+                 stdout = "", stderr = "")
+  if (ret != 0) {
+    message(sprintf("system2 reported error code %s", ret))
+  }
+
 
 }
 
