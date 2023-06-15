@@ -4,7 +4,7 @@ test_mpi <- function(script, procs = 2) {
   on_linux <- as.character(Sys.info()['sysname']) == "Linux"
 
   cmdquote <- if (on_windows) '"' else "'"
-  rs_path <- if (on_linux) "$(R_HOME)/bin/" else ""
+  rs_path <- if (on_linux) "$(R_HOME)/bin/" else if (on_windows) "" else "/usr/local/bin/"
 
   ret <- system2("mpiexec", sprintf(" -n %s %sRscript -e %s%s%s", procs, rs_path,
                                cmdquote, script, cmdquote),
