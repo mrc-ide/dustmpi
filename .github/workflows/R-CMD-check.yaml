@@ -33,6 +33,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: mpi4py/setup-mpi@v1
 
       - uses: r-lib/actions/setup-pandoc@v2
 
