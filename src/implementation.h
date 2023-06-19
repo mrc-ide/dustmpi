@@ -8,6 +8,7 @@ using rng_state_type = dust::random::xoshiro256plus;
 class model {
 public:
   struct pars {
+    double alpha;
     double beta;
     double gamma;
     double dt;
@@ -22,22 +23,22 @@ public:
     double S = state[0];
     double I = state[1];
     double R = state[2];
-    double cumulative_incidence = state[3];
 
     double N = S + I + R;
 
     double p_SI = 1 - std::exp(-(pars_->beta) * I / N);
     double p_IR = 1 - std::exp(-(pars_->gamma));
-    double n_IR = dust::random::binomial<double>(rng_state, I,
-                                                 p_IR * pars_->dt);
-    double n_SI = dust::random::binomial<double>(rng_state, S,
-                                                 p_SI * pars_->dt);
+    double p_RS = 1 - std::exp(-(pars_->alpha));
 
-    state_next[0] = S - n_SI;
+
+    double n_SI = dust::random::binomial<double>(rng_state, S, p_SI * pars_->dt);
+    double n_IR = dust::random::binomial<double>(rng_state, I, p_IR * pars_->dt);
+    double n_RS = dust::random::binomial<double>(rng_state, R, p_RS * pars_->dt);
+
+    state_next[0] = S - n_SI + n_RS;
     state_next[1] = I + n_SI - n_IR;
-    state_next[2] = R + n_IR;
-    state_next[3] = cumulative_incidence + n_SI;
-    state_next[4] = (time % pars_->freq == 0) ? n_SI : state[4] + n_SI;
+    state_next[2] = R + n_IR - n_RS;
+    state_next[3] = (time % pars_->freq == 0) ? n_SI : state[3] + n_SI;
   }
 
 private:

@@ -12,7 +12,8 @@ cpp11::sexp simulate_model(cpp11::list r_pars,
                            cpp11::sexp r_rng_ptr,
                            bool use_mpi) {
   const int freq = cpp11::as_cpp<int>(r_pars["freq"]);
-  model::pars pars{cpp11::as_cpp<double>(r_pars["beta"]),
+  model::pars pars{cpp11::as_cpp<double>(r_pars["alpha"]),
+                   cpp11::as_cpp<double>(r_pars["beta"]),
                    cpp11::as_cpp<double>(r_pars["gamma"]),
                    1.0 / static_cast<double>(freq),
                    freq};
